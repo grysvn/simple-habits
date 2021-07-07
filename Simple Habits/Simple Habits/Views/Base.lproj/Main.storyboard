@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="31.884057971014496" y="88.392857142857139"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Habits Table View Controller-->
         <scene sceneID="iAA-qE-a6M">
             <objects>
-                <tableViewController id="GPl-Vp-Jn7" sceneMemberID="viewController">
+                <tableViewController id="GPl-Vp-Jn7" customClass="HabitsTableViewController" customModule="Simple_Habits" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BUK-uI-Ouv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
