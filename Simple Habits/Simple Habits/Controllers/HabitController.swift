@@ -30,8 +30,8 @@ class HabitController {
         group.enter()
         habitInstanceProvider.getHabitInstances(for: DateUtils.gmtDayString(from: date)) { result in
             switch result {
-            case .success(let loadedInstances):
-                habitInstances = loadedInstances
+            case .success(let instances):
+                habitInstances = instances
             case .failure(let instancesError):
                 error = instancesError
             }

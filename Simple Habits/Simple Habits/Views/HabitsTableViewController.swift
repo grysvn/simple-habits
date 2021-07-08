@@ -44,6 +44,25 @@ class HabitsTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let title = "Done"
+
+        let action = UIContextualAction(style: .normal, title: title,
+        handler: { (action, view, completionHandler) in
+        // Update data source when user taps action
+        //self.dataSource?.setFavorite(!favorite, at: indexPath)
+            print("DID THE THING")
+            completionHandler(true)
+        })
+
+        action.backgroundColor = .green
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
 
     /*
     // Override to support conditional editing of the table view.
