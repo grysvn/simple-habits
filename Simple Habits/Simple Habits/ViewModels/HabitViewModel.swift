@@ -8,6 +8,7 @@
 import Foundation
 
 struct HabitViewModel {
+    let id: UUID
     let emoji: String
     let name: String
     let doneTimes: String

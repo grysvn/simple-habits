@@ -68,7 +68,7 @@ class HabitController {
                     let relevantInstance = habitInstances.first { instance in
                         instance.habitId == habit.id
                     }
-                    return HabitViewModel(emoji: habit.emoji, name: habit.name, doneTimes: String(relevantInstance?.doneTimes ?? -1), goalTimes: String(habit.goalTimes))
+                    return HabitViewModel(id: habit.id, emoji: habit.emoji, name: habit.name, doneTimes: String(relevantInstance?.doneTimes ?? -1), goalTimes: String(habit.goalTimes))
                 }
                 completion(HabitListViewModel(error: nil, habits: viewModels))
             }

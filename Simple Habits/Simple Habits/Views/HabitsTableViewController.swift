@@ -10,42 +10,40 @@ import UIKit
 class HabitsTableViewController: UITableViewController {
 
     private var controller: HabitController = HabitController()
+    private var viewModel: HabitListViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-
-        controller.loadHabitListViewModel { listViewModel in
-            print(listViewModel)
+        controller.loadHabitListViewModel { [weak self] listViewModel in
+            guard let self = self else { return }
+            self.viewModel = listViewModel
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return viewModel?.habits.count ?? 0
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
 
-        // Configure the cell...
+        guard let habitViewModel = viewModel?.habits[indexPath.row] else {
+            fatalError("There should be a thing here!")
+        }
+        cell.textLabel?.text = "\(habitViewModel.emoji) \(habitViewModel.name) - \(habitViewModel.doneTimes)/\(habitViewModel.goalTimes)"
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
