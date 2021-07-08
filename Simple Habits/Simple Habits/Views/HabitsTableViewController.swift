@@ -9,8 +9,8 @@ import UIKit
 
 class HabitsTableViewController: UITableViewController {
 
-    private var controller: HabitController = HabitController()
-    private var viewModel: HabitListViewModel?
+    var controller: HabitController = HabitController()
+    var viewModel: HabitListViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +49,21 @@ class HabitsTableViewController: UITableViewController {
         _ tableView: UITableView,
         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
+        guard let id = viewModel?.habits[indexPath.row].id else {
+            fatalError("Where's the thing?")
+        }
         let title = "Done"
 
         let action = UIContextualAction(style: .normal, title: title,
         handler: { (action, view, completionHandler) in
-        // Update data source when user taps action
-        //self.dataSource?.setFavorite(!favorite, at: indexPath)
-            print("DID THE THING")
+            
+            self.controller.markHabitAsDone(habitId: id) { [weak self] newViewModel in
+                guard let self = self else {
+                    return
+                }
+                self.viewModel = newViewModel
+                self.tableView.reloadData()
+            }
             completionHandler(true)
         })
 

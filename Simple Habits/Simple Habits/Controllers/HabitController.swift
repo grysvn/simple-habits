@@ -21,6 +21,11 @@ class HabitController {
         self.habitInstanceProvider = habitInstanceProvider
     }
 
+    func markHabitAsDone(for date: Date = Date(), habitId: UUID, completion: @escaping HabitListViewModelCompletion) {
+        habitInstanceProvider.markHabitInstanceAsDone(for: DateUtils.gmtDayString(from: date), habitId: habitId, nil)
+        loadHabitListViewModel(completion: completion)
+    }
+    
     func loadHabitListViewModel(for date: Date = Date(), completion: @escaping HabitListViewModelCompletion) {
         let group = DispatchGroup()
         var habitInstances: [HabitInstance]?
